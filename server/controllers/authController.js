@@ -1,4 +1,4 @@
-import User from "../models/users";
+import User from "../models/users.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -38,38 +38,28 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Senha Incorreta" });
     }
 
-    const accessToken = jwt.sign({ id: user._id }, ACCESS_SECRET, {
+    const accessToken = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET, {
       expiresIn: "15min",
     });
-    const refreshToken = jwt.sign({ id: user._id }, REFRESH_SECRET, {
-      expiresIn: "7d",
-    });
+
+    const refreshToken = jwt.sign(
+      { id: user._id },
+      process.env.REFRESH_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
     });
 
-    return res.status(200).json({ accessToken });
+    return res.status(200).json({ accessToken, refreshToken });
   } catch (error) {
     return res.status(500).json({ error: "Erro ao tentar logar" });
   }
-};
-
-export const refreshAccessToken = async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-  if (!refreshToken) return res.status(403).json({ message: "Acesso negado!" });
-
-  jwt.verify(refreshToken, REFRESH_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ message: "Token inválido!" });
-
-    const newAccessToken = jwt.sign({ id: user.id }, ACCESS_SECRET, {
-      expiresIn: "15m",
-    });
-
-    return res.json({ accessToken: newAccessToken });
-  });
 };
 
 export const logoutUser = async (req, res) => {
