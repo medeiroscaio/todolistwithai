@@ -55,6 +55,44 @@ function Auth() {
     }
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const fields = [email, password];
+
+    if (fields.some((field) => field.value.trim() === "")) {
+      notifyError("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    if (!regexEmail.test(email.value)) {
+      notifyError("Digite um email válido.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/users/login",
+        {
+          email: email.value,
+          password: password.value,
+        },
+
+        notifySuccess("Logado com sucesso"),
+        navigate("/Home"),
+        localStorage.setItem("Access Token", response.data.accessToken)
+      );
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.log(error.response.data.message);
+        notifyError(error.response.data.message);
+      } else {
+        console.log("Erro desconhecido", error);
+        notifyError("Erro no login, tente novamente.");
+      }
+    }
+  };
+
   return (
     <div className="main">
       <input type="checkbox" id="chk" aria-hidden="true" />
@@ -95,16 +133,28 @@ function Auth() {
       </div>
 
       <div className="login">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
+        <form onSubmit={handleLogin}>
           <label htmlFor="chk" aria-hidden="true">
             Login
           </label>
-          <input type="email" name="email" placeholder="Email" required />
-          <input type="password" name="pswd" placeholder="Password" required />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+            value={email.value}
+            onChange={(e) => setEmail({ value: e.target.value, dirty: true })}
+          />
+          <input
+            type="password"
+            name="pswd"
+            placeholder="Password"
+            required
+            value={password.value}
+            onChange={(e) =>
+              setPassword({ value: e.target.value, dirty: true })
+            }
+          />
           <button type="submit">Login</button>
         </form>
       </div>
