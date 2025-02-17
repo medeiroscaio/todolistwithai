@@ -8,18 +8,16 @@ body {
   align-items: center;
   min-height: 100vh;
   font-family: "Jost", sans-serif;
-  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+  background-color: #f6fbf4;
 }
 
 .main {
   width: 350px;
   height: 500px;
-  background: red;
+  background: #f5f5f5;
   overflow: hidden;
-  background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38")
-    no-repeat center/ cover;
   border-radius: 10px;
-  box-shadow: 5px 20px 50px #000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 #chk {
   display: none;
@@ -30,7 +28,7 @@ body {
   height: 100%;
 }
 label {
-  color: #fff;
+  color: #123524;
   font-size: 2.3em;
   justify-content: center;
   display: flex;
@@ -41,7 +39,7 @@ label {
 }
 input {
   width: 60%;
-  height: 10px;
+  height: 30px;
   background: #e0dede;
   justify-content: center;
   display: flex;
@@ -57,8 +55,8 @@ button {
   margin: 10px auto;
   justify-content: center;
   display: block;
-  color: #fff;
-  background: #573b8a;
+  color: #5d5d5d;
+  background: #e5d429;
   font-size: 1em;
   font-weight: bold;
   margin-top: 30px;
@@ -69,7 +67,7 @@ button {
   cursor: pointer;
 }
 button:hover {
-  background: #6d44b8;
+  background: #dac927;
 }
 .login {
   height: 460px;
@@ -79,7 +77,7 @@ button:hover {
   transition: 0.8s ease-in-out;
 }
 .login label {
-  color: #573b8a;
+  color: #123524;
   transform: scale(0.6);
 }
 

@@ -107,7 +107,7 @@ function Auth() {
           <input
             type="text"
             name="txt"
-            placeholder="User name"
+            placeholder="Username"
             value={name.value}
             onChange={(e) => setName({ value: e.target.value, dirty: true })}
           />
