@@ -46,9 +46,7 @@ export const loginUser = async (req, res) => {
     const refreshToken = jwt.sign(
       { id: user._id },
       process.env.REFRESH_SECRET,
-      {
-        expiresIn: "7d",
-      }
+      { expiresIn: "7d" }
     );
 
     res.cookie("refreshToken", refreshToken, {
@@ -57,9 +55,13 @@ export const loginUser = async (req, res) => {
       sameSite: "strict",
     });
 
-    return res.status(200).json({ accessToken, refreshToken });
+    return res.status(200).json({
+      message: "Login realizado com sucesso",
+      accessToken,
+      refreshToken,
+    });
   } catch (error) {
-    return res.status(500).json({ error: "Erro ao tentar logar" });
+    return res.status(500).json({ message: "Erro ao tentar logar" });
   }
 };
 

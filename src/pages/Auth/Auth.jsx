@@ -76,18 +76,20 @@ function Auth() {
         {
           email: email.value,
           password: password.value,
-        },
-
-        notifySuccess("Logado com sucesso"),
-        navigate("/Home"),
-        localStorage.setItem("Access Token", response.data.accessToken)
+        }
       );
+
+      localStorage.setItem("Access Token", response.data.accessToken);
+      notifySuccess(response.data.message);
+      navigate("/Home");
     } catch (error) {
-      if (error.response && error.response.data) {
-        console.log(error.response.data.message);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
         notifyError(error.response.data.message);
       } else {
-        console.log("Erro desconhecido", error);
         notifyError("Erro no login, tente novamente.");
       }
     }
@@ -98,7 +100,7 @@ function Auth() {
       <input type="checkbox" id="chk" aria-hidden="true" />
 
       <div className="signup">
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleRegister} noValidate>
           <label htmlFor="chk" aria-hidden="true">
             Sign up
           </label>
@@ -106,7 +108,6 @@ function Auth() {
             type="text"
             name="txt"
             placeholder="User name"
-            required
             value={name.value}
             onChange={(e) => setName({ value: e.target.value, dirty: true })}
           />
@@ -114,7 +115,6 @@ function Auth() {
             type="email"
             name="email"
             placeholder="Email"
-            required
             value={email.value}
             onChange={(e) => setEmail({ value: e.target.value, dirty: true })}
           />
@@ -122,7 +122,6 @@ function Auth() {
             type="password"
             name="pswd"
             placeholder="Password"
-            required
             value={password.value}
             onChange={(e) =>
               setPassword({ value: e.target.value, dirty: true })
@@ -133,7 +132,7 @@ function Auth() {
       </div>
 
       <div className="login">
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} noValidate>
           <label htmlFor="chk" aria-hidden="true">
             Login
           </label>
@@ -141,7 +140,6 @@ function Auth() {
             type="email"
             name="email"
             placeholder="Email"
-            required
             value={email.value}
             onChange={(e) => setEmail({ value: e.target.value, dirty: true })}
           />
@@ -149,7 +147,6 @@ function Auth() {
             type="password"
             name="pswd"
             placeholder="Password"
-            required
             value={password.value}
             onChange={(e) =>
               setPassword({ value: e.target.value, dirty: true })
