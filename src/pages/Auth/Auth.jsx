@@ -96,67 +96,78 @@ function Auth() {
   };
 
   return (
-    <div className="main">
-      <input type="checkbox" id="chk" aria-hidden="true" />
+    <div className="main-container">
+      <div className="main">
+        <input type="checkbox" id="chk" aria-hidden="true" />
 
-      <div className="signup">
-        <form onSubmit={handleRegister} noValidate>
-          <label htmlFor="chk" aria-hidden="true">
-            Sign up
-          </label>
-          <input
-            type="text"
-            name="txt"
-            placeholder="Username"
-            value={name.value}
-            onChange={(e) => setName({ value: e.target.value, dirty: true })}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email.value}
-            onChange={(e) => setEmail({ value: e.target.value, dirty: true })}
-          />
-          <input
-            type="password"
-            name="pswd"
-            placeholder="Password"
-            value={password.value}
-            onChange={(e) =>
-              setPassword({ value: e.target.value, dirty: true })
-            }
-          />
-          <button type="submit">Sign up</button>
-        </form>
+        <div className="signup">
+          <form onSubmit={handleRegister} noValidate>
+            <label htmlFor="chk" aria-hidden="true">
+              Sign up
+            </label>
+            <input
+              type="text"
+              name="txt"
+              placeholder="Username"
+              value={name.value}
+              className="auth-input"
+              onChange={(e) => setName({ value: e.target.value, dirty: true })}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email.value}
+              className="auth-input"
+              onChange={(e) => setEmail({ value: e.target.value, dirty: true })}
+            />
+            <input
+              type="password"
+              name="pswd"
+              placeholder="Password"
+              value={password.value}
+              className="auth-input"
+              onChange={(e) =>
+                setPassword({ value: e.target.value, dirty: true })
+              }
+            />
+            <button className="auth-button" type="submit">
+              Sign up
+            </button>
+          </form>
+        </div>
+
+        <div className="login">
+          <form onSubmit={handleLogin} noValidate>
+            <label htmlFor="chk" aria-hidden="true">
+              Login
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={email.value}
+              className="auth-input"
+              onChange={(e) => setEmail({ value: e.target.value, dirty: true })}
+            />
+            <input
+              type="password"
+              name="pswd"
+              placeholder="Password"
+              value={password.value}
+              className="auth-input"
+              onChange={(e) =>
+                setPassword({ value: e.target.value, dirty: true })
+              }
+            />
+            <button className="auth-button" type="submit">
+              Login
+            </button>
+          </form>
+        </div>
+
+        <ToastContainer />
       </div>
-
-      <div className="login">
-        <form onSubmit={handleLogin} noValidate>
-          <label htmlFor="chk" aria-hidden="true">
-            Login
-          </label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={email.value}
-            onChange={(e) => setEmail({ value: e.target.value, dirty: true })}
-          />
-          <input
-            type="password"
-            name="pswd"
-            placeholder="Password"
-            value={password.value}
-            onChange={(e) =>
-              setPassword({ value: e.target.value, dirty: true })
-            }
-          />
-          <button type="submit">Login</button>
-        </form>
-      </div>
-
-      <ToastContainer />
     </div>
   );
 }
