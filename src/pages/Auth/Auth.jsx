@@ -17,6 +17,21 @@ function Auth() {
   const notifySuccess = (message) => toast.success(message);
   const notifyError = (message) => toast.error(message);
 
+  const resetFields = () => {
+    setName({
+      value: "",
+      dirty: false,
+    });
+    setEmail({
+      value: "",
+      dirty: false,
+    });
+    setPassword({
+      value: "",
+      dirty: false,
+    });
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -44,6 +59,7 @@ function Auth() {
 
       notifySuccess("Registrado com sucesso!");
       console.log(response.data);
+      resetFields();
       //navigate login aqui
     } catch (error) {
       if (error.response && error.response.data) {
