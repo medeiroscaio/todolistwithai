@@ -1,0 +1,6 @@
+.protected-layout {
+  display: flex;
+}
+.content {
+  padding-left: 20px;
+}

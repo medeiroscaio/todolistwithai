@@ -81,7 +81,7 @@ function Auth() {
 
       localStorage.setItem("Access Token", response.data.accessToken);
       notifySuccess(response.data.message);
-      navigate("/Home");
+      navigate("/tasks");
     } catch (error) {
       if (
         error.response &&
