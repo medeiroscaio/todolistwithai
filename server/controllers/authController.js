@@ -59,6 +59,9 @@ export const loginUser = async (req, res) => {
       message: "Login realizado com sucesso",
       accessToken,
       refreshToken,
+      name: user.name,
+      email: user.email,
+      image: user.profileImage,
     });
   } catch (error) {
     return res.status(500).json({ message: "Erro ao tentar logar" });
@@ -74,7 +77,7 @@ export const logoutUser = async (req, res) => {
 
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
   });
 

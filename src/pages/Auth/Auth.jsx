@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Auth/Auth.css";
@@ -16,6 +16,12 @@ function Auth() {
 
   const notifySuccess = (message) => toast.success(message);
   const notifyError = (message) => toast.error(message);
+
+  const accessToken = localStorage.getItem("Access Token");
+
+  if (accessToken) {
+    return <Navigate to="/tasks" replace />;
+  }
 
   const resetFields = () => {
     setName({
@@ -87,16 +93,21 @@ function Auth() {
     }
 
     try {
-      const response = await axios.post(
+      const { data } = await axios.post(
         "http://localhost:5000/api/users/login",
         {
           email: email.value,
           password: password.value,
-        }
+        },
+        { withCredentials: true }
       );
 
-      localStorage.setItem("Access Token", response.data.accessToken);
-      notifySuccess(response.data.message);
+      localStorage.setItem("Access Token", data.accessToken);
+      localStorage.setItem("userName", data.name);
+      localStorage.setItem("userEmail", data.email);
+      localStorage.setItem("userImage", data.image);
+
+      notifySuccess(data.message);
       navigate("/tasks");
     } catch (error) {
       if (
@@ -104,7 +115,7 @@ function Auth() {
         error.response.data &&
         error.response.data.message
       ) {
-        notifyError(error.response.data.message);
+        notifyError(error.data.message);
       } else {
         notifyError("Erro no login, tente novamente.");
       }
