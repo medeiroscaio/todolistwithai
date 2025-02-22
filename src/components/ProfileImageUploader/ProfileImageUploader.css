@@ -1,0 +1,33 @@
+.modal-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.modal-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-button-confirm {
+  margin-bottom: 10px;
+}
+
+.modal-button-close {
+  background-color: #6c757d;
+}
+
+.modal-button:hover {
+  transform: scale(1.05);
+}
+
+.modal-button:active {
+  transform: scale(0.98);
+}
