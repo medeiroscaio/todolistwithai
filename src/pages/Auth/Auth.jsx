@@ -108,14 +108,14 @@ function Auth() {
       localStorage.setItem("userImage", data.image);
 
       notifySuccess(data.message);
-      navigate("/tasks");
+      setTimeout(() => navigate("/tasks"), 1000);
     } catch (error) {
       if (
         error.response &&
         error.response.data &&
         error.response.data.message
       ) {
-        notifyError(error.data.message);
+        notifyError(error.response.data.message);
       } else {
         notifyError("Erro no login, tente novamente.");
       }
