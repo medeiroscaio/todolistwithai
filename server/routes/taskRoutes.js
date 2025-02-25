@@ -1,7 +1,7 @@
 import express from "express";
 import {
   createTask,
-  getUsertasks,
+  getAllTasks,
   getTodayTasks,
   getUpcomingTasks,
   updateTask,
@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.post("/", authMiddleware, createTask);
 
-router.get("/", authMiddleware, getUsertasks);
+router.get("/", authMiddleware, getAllTasks);
 
 router.get("/today", authMiddleware, getTodayTasks);
 

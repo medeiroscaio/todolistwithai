@@ -20,14 +20,14 @@ export const createTask = async (req, res) => {
   }
 };
 
-export const getUsertasks = async (req, res) => {
+export const getAllTasks = async (req, res) => {
   try {
     const userId = req.user.id;
     const tasks = await Task.find({ user: userId }).sort({ createdAt: -1 });
     return res.status(200).json(tasks);
   } catch (error) {
     return res.status(500).json({
-      error: "Erro ao buscar tarefas",
+      error: "Erro ao buscar todas as tarefas",
     });
   }
 };
