@@ -1,10 +1,12 @@
 import React from "react";
+import TaskList from "../components/Tasklist/TaskList";
 
 function Upcoming() {
   return (
-    <div>
-      <h1>Upcoming.</h1>
-    </div>
+    <TaskList
+      apiUrl="http://localhost:5000/api/tasks/upcoming"
+      text="Upcoming Tasks"
+    />
   );
 }
 

@@ -21,6 +21,7 @@ export const createTask = async (req, res) => {
 };
 
 export const getAllTasks = async (req, res) => {
+  console.log("Usuário autenticado:", req.user);
   try {
     const userId = req.user.id;
     const tasks = await Task.find({ user: userId }).sort({ createdAt: -1 });

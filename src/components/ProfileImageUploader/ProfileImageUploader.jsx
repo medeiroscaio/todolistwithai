@@ -116,7 +116,7 @@ const ProfileImageUploader = ({
     setImageProfile(base64Image);
 
     try {
-      const accessToken = localStorage.getItem("Access Token");
+      const accessToken = localStorage.getItem("accessToken");
       const email = localStorage.getItem("userEmail");
       if (!email) {
         toast.error("Erro: E-mail do usuário não encontrado.");

@@ -1,10 +1,12 @@
 import React from "react";
+import TaskList from "../components/Tasklist/TaskList";
 
 function Today() {
   return (
-    <div>
-      <h1>Today.</h1>
-    </div>
+    <TaskList
+      apiUrl="http://localhost:5000/api/tasks/today"
+      text="Today Tasks"
+    />
   );
 }
 

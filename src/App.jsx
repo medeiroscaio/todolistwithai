@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./pages/Auth/Auth";
-import Tasks from "./pages/Tasks/Tasks";
+import Tasks from "./pages/Tasks";
 import Today from "./pages/Today";
 import Ask from "./pages/Ask";
 import Upcoming from "./pages/Upcoming";

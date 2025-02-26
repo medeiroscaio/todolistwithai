@@ -17,7 +17,7 @@ function Auth() {
   const notifySuccess = (message) => toast.success(message);
   const notifyError = (message) => toast.error(message);
 
-  const accessToken = localStorage.getItem("Access Token");
+  const accessToken = localStorage.getItem("accessToken");
 
   if (accessToken) {
     return <Navigate to="/tasks" replace />;
@@ -102,7 +102,7 @@ function Auth() {
         { withCredentials: true }
       );
 
-      localStorage.setItem("Access Token", data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("userName", data.name);
       localStorage.setItem("userEmail", data.email);
       localStorage.setItem("userImage", data.image);
