@@ -6,6 +6,7 @@ function Today() {
     <TaskList
       apiUrl="http://localhost:5000/api/tasks/today"
       text="Today Tasks"
+      showCreateButton={false}
     />
   );
 }

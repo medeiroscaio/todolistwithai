@@ -6,6 +6,7 @@ function Upcoming() {
     <TaskList
       apiUrl="http://localhost:5000/api/tasks/upcoming"
       text="Upcoming Tasks"
+      showCreateButton={false}
     />
   );
 }
