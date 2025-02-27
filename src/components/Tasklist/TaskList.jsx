@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TaskItem from "./TaskItem";
 import "../Tasklist/Tasklist.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const TaskList = ({ apiUrl, text, showCreateButton }) => {
   const [tasks, setTasks] = useState([]);
@@ -16,12 +17,52 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
     dirty: false,
   });
 
-  const handleCreate = () => {
+  const resetFields = () => {
+    setTitle({ value: "", dirty: false });
+    setInfo({ value: "", dirty: false });
+    setCategory({ value: "none", dirty: false });
+    setDueDate({
+      value: new Date().toISOString().split("T")[0],
+      dirty: false,
+    });
+  };
+
+  const notifySuccess = (message) => toast.success(message);
+  const notifyError = (message) => toast.error(message);
+
+  const handleCreateTask = async () => {
     const fields = [title, info, category, dueDate];
 
     if (fields.some((field) => field.value.trim() === "")) {
       notifyError("Por favor, preencha todos os campos.");
       return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/tasks",
+        {
+          title: title.value,
+          description: info.value,
+          category: category.value,
+          dueDate: dueDate.value,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      notifySuccess("Criado com sucesso!");
+      setTasks((prevTasks) => [...prevTasks, response.data]);
+      resetFields();
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.log(error.response.data.error);
+      } else {
+        console.log("Erro desconhecido", error);
+      }
+      notifyError("Erro na criação, tente novamente.");
+    } finally {
+      setIsModalOpen(false);
     }
   };
 
@@ -29,10 +70,8 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
     const fetchTasks = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem("accessToken");
 
         const response = await axios.get(apiUrl, {
-          headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
         });
 
@@ -52,13 +91,10 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
 
   const handleToggleComplete = async (taskId) => {
     try {
-      const token = localStorage.getItem("accessToken");
-
       await axios.patch(
-        `/api/tasks/${taskId}/toggle`,
+        `http://localhost:5000/api/tasks/${taskId}/toggle`,
         {},
         {
-          headers: { Authorization: `Bearer ${token}` },
           withCredentials: true,
         }
       );
@@ -143,9 +179,14 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
               </select>
 
               <div className="button-container">
-                <button className="create-task-button">Criar</button>
+                <button
+                  className="create-task-button"
+                  onClick={handleCreateTask}
+                >
+                  Create
+                </button>
                 <button className="cancel-task-button" onClick={toggleOverlay}>
-                  Cancelar
+                  Cancel
                 </button>
               </div>
             </div>
@@ -165,6 +206,7 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
           />
         ))}
       </ul>
+      <ToastContainer />
     </div>
   );
 };

@@ -5,8 +5,8 @@ const TaskSchema = new mongoose.Schema({
   description: { type: String, default: "" },
   category: {
     type: String,
-    enum: ["personal", "leisure", "tasks", ""],
-    default: "",
+    enum: ["personal", "leisure", "tasks", "none"],
+    default: "none",
   },
   completed: { type: Boolean, default: false },
   dueDate: { type: Date },

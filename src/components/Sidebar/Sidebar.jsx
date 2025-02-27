@@ -41,7 +41,6 @@ const Sidebar = () => {
 
       localStorage.removeItem("userName");
       localStorage.removeItem("userEmail");
-      localStorage.removeItem("accessToken");
       localStorage.removeItem("userImage");
 
       setUser({ username: "", email: "", profileImage: defaultIcon });

@@ -4,8 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const authMiddleware = async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  const accessToken = authHeader && authHeader.split(" ")[1];
+  const accessToken = req.cookies.accessToken;
   const refreshToken = req.cookies.refreshToken;
 
   if (!accessToken && !refreshToken) {
@@ -33,13 +32,18 @@ export const authMiddleware = async (req, res, next) => {
           const newAccessToken = jwt.sign(
             { id: decoded.id },
             process.env.ACCESS_SECRET,
-            {
-              expiresIn: "15m",
-            }
+            { expiresIn: "15m" }
           );
-          res.status(200).json({ accessToken: newAccessToken });
+
+          res.cookie("accessToken", newAccessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Strict",
+            maxAge: 15 * 60 * 1000,
+          });
+
           req.user = { id: decoded.id };
-          next();
+          return next();
         }
       );
     } else {

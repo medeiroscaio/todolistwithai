@@ -3,6 +3,7 @@ import Task from "../models/tasks.js";
 export const createTask = async (req, res) => {
   try {
     const { title, description, category, dueDate } = req.body;
+
     const userId = req.user.id;
 
     const task = new Task({
@@ -16,12 +17,14 @@ export const createTask = async (req, res) => {
     await task.save();
     return res.status(201).json(task);
   } catch (error) {
-    return res.status(500).json({ error: "Erro ao tentar criar tarefa" });
+    console.error("Erro ao criar tarefa:", error);
+    return res
+      .status(500)
+      .json({ error: error.message || "Erro ao tentar criar tarefa" });
   }
 };
 
 export const getAllTasks = async (req, res) => {
-  console.log("Usuário autenticado:", req.user);
   try {
     const userId = req.user.id;
     const tasks = await Task.find({ user: userId }).sort({ createdAt: -1 });
