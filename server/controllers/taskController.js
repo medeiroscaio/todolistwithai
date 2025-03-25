@@ -41,10 +41,10 @@ export const getTodayTasks = async (req, res) => {
     const userId = req.user.id;
 
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    today.setUTCHours(0, 0, 0, 0);
 
     const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
+    tomorrow.setUTCDate(today.getUTCDate() + 1);
 
     const tasks = await Task.find({
       user: userId,

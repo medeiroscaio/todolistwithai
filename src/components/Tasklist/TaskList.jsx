@@ -74,7 +74,7 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
         const response = await axios.get(apiUrl, {
           withCredentials: true,
         });
-
+        console.log(response.data);
         setTasks(response.data);
       } catch (error) {
         console.error(
