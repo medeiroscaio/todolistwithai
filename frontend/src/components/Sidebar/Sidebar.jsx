@@ -9,6 +9,7 @@ import today from "../../assets/today.svg";
 import upcoming from "../../assets/upcoming.svg";
 import ask from "../../assets/ask.svg";
 import logout from "../../assets/logout.svg";
+import { localURL } from "../assets/httpService";
 import "./Sidebar.css";
 
 const Sidebar = () => {
@@ -34,7 +35,7 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/users/logout",
+        `http://${localURL}:5000/api/users/logout`,
         {},
         { withCredentials: true }
       );
@@ -52,7 +53,6 @@ const Sidebar = () => {
       );
     }
   };
-
   const handleOpenModal = () => {
     setModalIsOpen(true);
   };

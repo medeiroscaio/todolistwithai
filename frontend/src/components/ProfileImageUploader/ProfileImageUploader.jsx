@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./ProfileImageUploader.css";
 import setCanvasPreview from "./SetCanvasPreview";
 import axios from "axios";
+import { localURL } from "../assets/httpService";
 
 Modal.setAppElement("#root");
 
@@ -123,19 +124,16 @@ const ProfileImageUploader = ({
       }
 
       await axios.post(
-        "http://localhost:5000/api/profile/updateProfileImage",
+        `http://${localURL}:5000/api/profile/updateProfileImage`,
         { profileImage: base64Image, email },
         {
           withCredentials: true,
         }
       );
 
-      localStorage.setItem("profileImage", base64Image);
-      onProfileImageUpdate(base64Image);
-      toast.success("Imagem atualizada com sucesso!");
+      toast.success("Imagem de perfil atualizada com sucesso!");
     } catch (error) {
-      console.error("Erro ao atualizar a imagem:", error);
-      toast.error("Erro ao atualizar a imagem. Tente novamente.");
+      toast.error("Erro ao atualizar a imagem de perfil.");
     }
 
     handleCloseModal();

@@ -4,6 +4,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../Auth/Auth.css";
+import { localURL } from "../assets/httpService";
 
 function Auth() {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ function Auth() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/register",
+        `http://${localURL}:5000/api/users/register`,
         {
           name: name.value,
           email: email.value,
@@ -88,7 +89,7 @@ function Auth() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/users/login",
+        `http://${localURL}:5000/api/users/login`,
         {
           email: email.value,
           password: password.value,

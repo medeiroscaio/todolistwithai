@@ -3,6 +3,7 @@ import axios from "axios";
 import TaskItem from "./TaskItem";
 import "../Tasklist/Tasklist.css";
 import { ToastContainer, toast } from "react-toastify";
+import { localURL } from "../assets/httpService"; // ajuste o caminho conforme sua estrutura
 
 const TaskList = ({ apiUrl, text, showCreateButton }) => {
   const [tasks, setTasks] = useState([]);
@@ -40,7 +41,7 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/tasks",
+        `http://${localURL}:5000/api/tasks`,
         {
           title: title.value,
           description: info.value,
@@ -92,7 +93,7 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
   const handleToggleComplete = async (taskId) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/tasks/${taskId}/toggle`,
+        `http://${localURL}:5000/api/tasks/${taskId}/toggle`,
         {},
         {
           withCredentials: true,
