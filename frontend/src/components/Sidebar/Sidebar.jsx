@@ -9,7 +9,7 @@ import today from "../../assets/today.svg";
 import upcoming from "../../assets/upcoming.svg";
 import ask from "../../assets/ask.svg";
 import logout from "../../assets/logout.svg";
-import { localURL } from "../assets/httpService/httpService"; // ajuste o caminho conforme necessário
+import { localURL } from "../../assets/httpService/httpService"; // ajuste o caminho conforme necessário
 import "./Sidebar.css";
 
 const Sidebar = () => {
