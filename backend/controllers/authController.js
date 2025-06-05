@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 // Segredos hardcoded para estudo
 const ACCESS_SECRET = "segredoAleatorioAcesso123";
 const REFRESH_SECRET = "segredoAleatorioRefresh456";
-const NODE_ENV = "production"; // ou "production" se quiser simular
 
 export const registerUser = async (req, res) => {
   try {
@@ -53,14 +52,14 @@ export const loginUser = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: NODE_ENV === "production",
+      secure: false,
       sameSite: "Lax",
       maxAge: 15 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: NODE_ENV === "production",
+      secure: false,
       sameSite: "Lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -79,13 +78,13 @@ export const loginUser = async (req, res) => {
 export const logoutUser = async (req, res) => {
   res.clearCookie("accessToken", {
     httpOnly: true,
-    secure: NODE_ENV === "production",
+    secure: false,
     sameSite: "Lax",
   });
 
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: NODE_ENV === "production",
+    secure: false,
     sameSite: "Lax",
   });
 

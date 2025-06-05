@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 // Segredos temporários para estudo:
 const ACCESS_SECRET = "segredoAleatorioAcesso123";
 const REFRESH_SECRET = "segredoAleatorioRefresh456";
-const NODE_ENV = "production"; // ou "production" se quiser simular
 
 export const authMiddleware = async (req, res, next) => {
   const accessToken = req.cookies.accessToken;
@@ -34,7 +33,7 @@ export const authMiddleware = async (req, res, next) => {
 
         res.cookie("accessToken", newAccessToken, {
           httpOnly: true,
-          secure: NODE_ENV === "production",
+          secure: false,
           sameSite: "Lax",
           maxAge: 15 * 60 * 1000, // 15 minutos
         });
