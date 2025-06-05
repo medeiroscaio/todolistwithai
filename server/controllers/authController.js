@@ -1,9 +1,11 @@
 import User from "../models/users.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
-dotenv.config();
+// Segredos hardcoded para estudo
+const ACCESS_SECRET = "segredoAleatorioAcesso123";
+const REFRESH_SECRET = "segredoAleatorioRefresh456";
+const NODE_ENV = "production"; // ou "production" se quiser simular
 
 export const registerUser = async (req, res) => {
   try {
@@ -13,10 +15,12 @@ export const registerUser = async (req, res) => {
     if (userExists) {
       return res.status(400).json({ message: "Usuário já cadastrado" });
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({ name, email, password: hashedPassword });
     await user.save();
+
     return res.status(201).json({ message: "Cadastrado com sucesso" });
   } catch (error) {
     return res.status(500).json({
@@ -39,28 +43,24 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Senha incorreta" });
     }
 
-    const accessToken = jwt.sign({ id: user._id }, process.env.ACCESS_SECRET, {
+    const accessToken = jwt.sign({ id: user._id }, ACCESS_SECRET, {
       expiresIn: "15m",
     });
 
-    const refreshToken = jwt.sign(
-      { id: user._id },
-      process.env.REFRESH_SECRET,
-      {
-        expiresIn: "7d",
-      }
-    );
+    const refreshToken = jwt.sign({ id: user._id }, REFRESH_SECRET, {
+      expiresIn: "7d",
+    });
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: NODE_ENV === "production",
       sameSite: "Strict",
       maxAge: 15 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: NODE_ENV === "production",
       sameSite: "Strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -79,13 +79,13 @@ export const loginUser = async (req, res) => {
 export const logoutUser = async (req, res) => {
   res.clearCookie("accessToken", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: NODE_ENV === "production",
     sameSite: "Strict",
   });
 
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: NODE_ENV === "production",
     sameSite: "Strict",
   });
 
