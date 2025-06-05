@@ -30,7 +30,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/profile", profileRoutes);
 
-const PORT = 5000;
 app.listen(5000, "0.0.0.0", () =>
   console.log(`Servidor rodando na porta 5000`)
 );
