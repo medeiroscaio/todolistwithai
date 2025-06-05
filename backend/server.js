@@ -6,16 +6,15 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
-import { localURL } from "../frontend/src/assets/httpService/httpService.js";
 
 dotenv.config();
 
 const app = express();
-const localURL = "http://18.224.67.75";
+const localURLBackend = "http://3.148.188.170";
 app.use(cookieParser());
 app.use(
   cors({
-    origin: localURL,
+    origin: localURLBackend,
     credentials: true,
   })
 );
