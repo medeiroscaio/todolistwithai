@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get(`${localURL}:5000/api/tasks`, { withCredentials: true })
+      .get(`${localURL}/api/tasks`, { withCredentials: true })
       .then(() => {
         setIsAuthenticated(true);
       })
