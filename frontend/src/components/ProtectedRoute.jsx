@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { localURL } from "../assets/httpService"; // ajuste o caminho conforme a estrutura do seu projeto
+import { localURL } from "../assets/httpService/httpService"; // ajuste o caminho conforme necessário
 
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);

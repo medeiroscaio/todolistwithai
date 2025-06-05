@@ -1,6 +1,6 @@
 import React from "react";
 import TaskList from "../components/Tasklist/TaskList";
-import { localURL } from "../assets/httpService"; // ajuste o caminho se necessário
+import { localURL } from "../assets/httpService/httpService"; // ajuste o caminho conforme necessário
 
 function Upcoming() {
   return (
