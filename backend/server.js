@@ -10,7 +10,7 @@ import profileRoutes from "./routes/profileRoutes.js";
 dotenv.config();
 
 const app = express();
-const localURLFrontEnd = "http://3.148.188.170";
+const localURLFrontEnd = "http://3.148.188.170:5173";
 app.use(cookieParser());
 app.use(
   cors({
