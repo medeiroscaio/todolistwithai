@@ -10,11 +10,11 @@ import profileRoutes from "./routes/profileRoutes.js";
 dotenv.config();
 
 const app = express();
-const localURLBackend = "http://3.148.188.170";
+const localURLFrontEnd = "http://3.148.188.170";
 app.use(cookieParser());
 app.use(
   cors({
-    origin: localURLBackend,
+    origin: localURLFrontEnd,
     credentials: true,
   })
 );
@@ -31,4 +31,6 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/profile", profileRoutes);
 
 const PORT = 5000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+app.listen(5000, "0.0.0.0", () =>
+  console.log(`Servidor rodando na porta 5000`)
+);
