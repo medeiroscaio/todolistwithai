@@ -3,7 +3,7 @@ import axios from "axios";
 import TaskItem from "./TaskItem";
 import "../Tasklist/Tasklist.css";
 import { ToastContainer, toast } from "react-toastify";
-import { localURL } from "../assets/httpService/httpService"; // ajuste o caminho conforme necessário
+import { localURL } from "../../assets/httpService/httpService"; // ajuste o caminho conforme necessário
 
 const TaskList = ({ apiUrl, text, showCreateButton }) => {
   const [tasks, setTasks] = useState([]);

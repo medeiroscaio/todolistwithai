@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./ProfileImageUploader.css";
 import setCanvasPreview from "./SetCanvasPreview";
 import axios from "axios";
-import { localURL } from "../assets/httpService/httpService"; // ajuste o caminho conforme necessário
+import { localURL } from "../../assets/httpService/httpService"; // ajuste o caminho conforme necessário
 Modal.setAppElement("#root");
 
 const MIN_DIMENSION = 120;
