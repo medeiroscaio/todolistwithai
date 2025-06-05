@@ -34,7 +34,7 @@ export const authMiddleware = async (req, res, next) => {
         res.cookie("accessToken", newAccessToken, {
           httpOnly: true,
           secure: false,
-          sameSite: "Lax",
+          sameSite: "None",
           maxAge: 15 * 60 * 1000, // 15 minutos
         });
 
