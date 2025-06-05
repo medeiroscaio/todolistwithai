@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 
 app.use(cookieParser());
-app.use(cors({ origin: "*", credentials: true }));
+app.use(cors({ origin: "*" }));
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ limit: "20mb", extended: true }));
 
