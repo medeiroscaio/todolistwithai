@@ -41,7 +41,7 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
 
     try {
       const response = await axios.post(
-        `http://${localURL}:5000/api/tasks`,
+        `${localURL}/api/tasks`,
         {
           title: title.value,
           description: info.value,
@@ -52,6 +52,7 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
           withCredentials: true,
         }
       );
+
       notifySuccess("Criado com sucesso!");
       setTasks((prevTasks) => [...prevTasks, response.data]);
       resetFields();
@@ -93,7 +94,7 @@ const TaskList = ({ apiUrl, text, showCreateButton }) => {
   const handleToggleComplete = async (taskId) => {
     try {
       await axios.patch(
-        `http://${localURL}:5000/api/tasks/${taskId}/toggle`,
+        `${localURL}/api/tasks/${taskId}/toggle`,
         {},
         {
           withCredentials: true,

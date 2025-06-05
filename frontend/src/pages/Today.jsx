@@ -5,7 +5,7 @@ import { localURL } from "../assets/httpService/httpService"; // ajuste o caminh
 function Today() {
   return (
     <TaskList
-      apiUrl={`http://${localURL}:5000/api/tasks/today`}
+      apiUrl={`${localURL}/api/tasks/today`}
       text="Today Tasks"
       showCreateButton={false}
     />

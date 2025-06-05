@@ -1,9 +1,1 @@
-export const localURL = "18.224.67.75"; // ou "52.91.123.45", ou "api.meudominio.com"
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: `http://${localURL}:5000/`,
-  withCredentials: true,
-});
-
-export default api;
+export const localURL = "http://3.139.72.40"; // ou "52.91.123.45", ou "api.meudominio.com"

@@ -123,7 +123,7 @@ const ProfileImageUploader = ({
       }
 
       await axios.post(
-        `http://${localURL}:5000/api/profile/updateProfileImage`,
+        `${localURL}/api/profile/updateProfileImage`,
         { profileImage: base64Image, email },
         {
           withCredentials: true,

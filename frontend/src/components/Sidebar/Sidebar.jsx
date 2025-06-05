@@ -35,11 +35,10 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        `http://${localURL}:5000/api/users/logout`,
+        `${localURL}/api/users/logout`,
         {},
         { withCredentials: true }
       );
-
       localStorage.removeItem("userName");
       localStorage.removeItem("userEmail");
       localStorage.removeItem("userImage");

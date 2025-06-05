@@ -49,14 +49,11 @@ function Auth() {
     }
 
     try {
-      const response = await axios.post(
-        `http://${localURL}:5000/api/users/register`,
-        {
-          name: name.value,
-          email: email.value,
-          password: password.value,
-        }
-      );
+      const response = await axios.post(`${localURL}/api/users/register`, {
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      });
 
       notifySuccess("Registrado com sucesso!");
       console.log(response.data);
@@ -89,13 +86,14 @@ function Auth() {
 
     try {
       const { data } = await axios.post(
-        `http://${localURL}:5000/api/users/login`,
+        `${localURL}/api/users/login`,
         {
           email: email.value,
           password: password.value,
         },
         { withCredentials: true }
       );
+
       localStorage.setItem("userName", data.name);
       localStorage.setItem("userEmail", data.email);
       localStorage.setItem("userImage", data.image);
